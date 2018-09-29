@@ -17,9 +17,9 @@ class CreateArtsTable extends Migration
             $table->increments('id');
             $table->string('agency');
             $table->string('agency_name');
-            $table->integer('date');
-            $table->string('description');
-            $table->string('image_link');
+            $table->string('date');
+            $table->string('description', 5000);
+            $table->string('image_link', 2500);
             $table->string('material');
             $table->string('title');
             $table->string('artist_first_name');
