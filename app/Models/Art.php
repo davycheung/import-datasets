@@ -11,16 +11,13 @@ class Art extends Eloquent
     protected $collection = 'arts';    
 
     protected $fillable = [
-        'agency',
-        'agency_name',
         'date',
+        'title',
         'description',
         'image_link',
         'material',
-        'title',
-        'artist_first_name',
-        'artist_last_name',
-        'line',
-        'station_name',
+        'agency',
+        'artist',
+        'location',
     ];
 }

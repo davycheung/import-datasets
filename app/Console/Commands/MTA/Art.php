@@ -49,17 +49,26 @@ class Art extends Command
 
         foreach ($results as $art) {
             ArtModel::updateOrCreate([
-                'agency' => $art->agency,
-                'agency_name' => $art->agency_name,
                 'date' => $art->art_date,
                 'description' => $art->art_description,
                 'image_link' => $art->art_image_link,
                 'material' => $art->art_material,
                 'title' => $art->art_title,
-                'artist_first_name' => $art->artist_first_name ?? '',
-                'artist_last_name' => $art->artist_last_name ?? '',
-                'line' => $art->line,
-                'station_name' => $art->station_name,
+
+                'agency' => (object) [
+                    'id' => $art->agency,
+                    'name' => $art->agency_name,
+                ],
+
+                'artist' => (object) [
+                    'first_name' => $art->artist_first_name ?? '',
+                    'last_name' => $art->artist_last_name ?? '',
+                ],
+
+                'location' => (object) [
+                    'line' => $art->line,
+                    'station' => $art->station_name,    
+                ]
             ]);
 
         //     // dump($art->art_image_link);
