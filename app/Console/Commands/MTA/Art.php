@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands\MTA;
 
+use Goutte;
 use App\Models\Art as ArtModel;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
@@ -62,6 +63,12 @@ class Art extends Command
                 'line' => $art->line,
                 'station_name' => $art->station_name,
             ]);
+
+        //     // dump($art->art_image_link);
+        //     // $crawler = Goutte::request('GET', $art->art_image_link);
+        //     // $crawler->filter('img[src^="../images"]')->each(function ($node) {
+        //     //   dump($node->attr('src'));
+        //     // });
         }
     }
 }

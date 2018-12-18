@@ -6,6 +6,8 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateArtsTable extends Migration
 {
+    protected $connection = 'mongodb';
+
     /**
      * Run the migrations.
      *
