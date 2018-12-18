@@ -4,7 +4,8 @@ namespace App\Console\Commands\MTA;
 
 use Goutte;
 use App\Models\Art as ArtModel;
-use GuzzleHttp\Client;
+use App\Services\MTA\Art as Client;
+// use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
 class Art extends Command
@@ -23,13 +24,17 @@ class Art extends Command
      */
     protected $description = 'Import MTA Art.';
 
+    protected $client;
+
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Client $client)
     {
+        $this->client = $client;
+
         parent::__construct();
     }
 
@@ -40,14 +45,7 @@ class Art extends Command
      */
     public function handle()
     {
-        $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://data.ny.gov',
-            // You can set any number of default request options.
-            'timeout'  => 2.0,
-        ]);
-        $response = $client->get('https://data.ny.gov/resource/qius-v36q.json');
-        $results = json_decode($response->getBody());
+        $results = $this->client->get();
 
         foreach ($results as $art) {
             ArtModel::updateOrCreate([
